@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1000001 /* BeeminderBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000001 /* BeeminderBarApp.swift */; };
+		A1000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000002 /* AppDelegate.swift */; };
+		A1000003 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000003 /* Goal.swift */; };
+		A1000004 /* Datapoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000004 /* Datapoint.swift */; };
+		A1000005 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000005 /* User.swift */; };
+		A1000006 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000006 /* KeychainService.swift */; };
+		A1000007 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000007 /* AuthenticationService.swift */; };
+		A1000008 /* BeeminderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000008 /* BeeminderAPI.swift */; };
+		A1000009 /* GoalRefreshService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000009 /* GoalRefreshService.swift */; };
+		A1000010 /* GoalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000010 /* GoalsViewModel.swift */; };
+		A1000011 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000011 /* SettingsViewModel.swift */; };
+		A1000012 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000012 /* ContentView.swift */; };
+		A1000013 /* GoalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000013 /* GoalListView.swift */; };
+		A1000014 /* GoalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000014 /* GoalRowView.swift */; };
+		A1000015 /* GoalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000015 /* GoalDetailView.swift */; };
+		A1000016 /* DatapointInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000016 /* DatapointInputView.swift */; };
+		A1000017 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000017 /* LoginView.swift */; };
+		A1000018 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000018 /* SettingsView.swift */; };
+		A1000019 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000019 /* ErrorBannerView.swift */; };
+		A1000020 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000020 /* Constants.swift */; };
+		A1000021 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000021 /* Extensions.swift */; };
+		A1000022 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000022 /* Secrets.swift */; };
+		A1000023 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1000023 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C1000001 /* BeeminderBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeeminderBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1000001 /* BeeminderBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeeminderBarApp.swift; sourceTree = "<group>"; };
+		B1000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B1000003 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		B1000004 /* Datapoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datapoint.swift; sourceTree = "<group>"; };
+		B1000005 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B1000006 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		B1000007 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		B1000008 /* BeeminderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeeminderAPI.swift; sourceTree = "<group>"; };
+		B1000009 /* GoalRefreshService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRefreshService.swift; sourceTree = "<group>"; };
+		B1000010 /* GoalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewModel.swift; sourceTree = "<group>"; };
+		B1000011 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		B1000012 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B1000013 /* GoalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListView.swift; sourceTree = "<group>"; };
+		B1000014 /* GoalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRowView.swift; sourceTree = "<group>"; };
+		B1000015 /* GoalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailView.swift; sourceTree = "<group>"; };
+		B1000016 /* DatapointInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatapointInputView.swift; sourceTree = "<group>"; };
+		B1000017 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B1000018 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B1000019 /* ErrorBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBannerView.swift; sourceTree = "<group>"; };
+		B1000020 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B1000021 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B1000022 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		B1000023 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B1000024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1000025 /* Secrets.example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.example.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D1000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E1000001 = {
+			isa = PBXGroup;
+			children = (
+				E1000002 /* BeeminderBar */,
+				E1000010 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E1000002 /* BeeminderBar */ = {
+			isa = PBXGroup;
+			children = (
+				E1000003 /* App */,
+				E1000004 /* Models */,
+				E1000005 /* Services */,
+				E1000006 /* ViewModels */,
+				E1000007 /* Views */,
+				E1000008 /* Utilities */,
+				E1000009 /* Resources */,
+				B1000022 /* Secrets.swift */,
+				B1000025 /* Secrets.example.swift */,
+			);
+			path = BeeminderBar;
+			sourceTree = "<group>";
+		};
+		E1000003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B1000001 /* BeeminderBarApp.swift */,
+				B1000002 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E1000004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B1000003 /* Goal.swift */,
+				B1000004 /* Datapoint.swift */,
+				B1000005 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E1000005 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B1000006 /* KeychainService.swift */,
+				B1000007 /* AuthenticationService.swift */,
+				B1000008 /* BeeminderAPI.swift */,
+				B1000009 /* GoalRefreshService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E1000006 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B1000010 /* GoalsViewModel.swift */,
+				B1000011 /* SettingsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E1000007 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B1000012 /* ContentView.swift */,
+				B1000013 /* GoalListView.swift */,
+				B1000014 /* GoalRowView.swift */,
+				B1000015 /* GoalDetailView.swift */,
+				B1000016 /* DatapointInputView.swift */,
+				B1000017 /* LoginView.swift */,
+				B1000018 /* SettingsView.swift */,
+				B1000019 /* ErrorBannerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E1000008 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B1000020 /* Constants.swift */,
+				B1000021 /* Extensions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		E1000009 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B1000023 /* Assets.xcassets */,
+				B1000024 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E1000010 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C1000001 /* BeeminderBar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1000001 /* BeeminderBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2000001 /* Build configuration list for PBXNativeTarget "BeeminderBar" */;
+			buildPhases = (
+				F1000002 /* Sources */,
+				D1000001 /* Frameworks */,
+				F1000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BeeminderBar;
+			productName = BeeminderBar;
+			productReference = C1000001 /* BeeminderBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					F1000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = F4000001 /* Build configuration list for PBXProject "BeeminderBar" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E1000001;
+			productRefGroup = E1000010 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1000001 /* BeeminderBar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000023 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000001 /* BeeminderBarApp.swift in Sources */,
+				A1000002 /* AppDelegate.swift in Sources */,
+				A1000003 /* Goal.swift in Sources */,
+				A1000004 /* Datapoint.swift in Sources */,
+				A1000005 /* User.swift in Sources */,
+				A1000006 /* KeychainService.swift in Sources */,
+				A1000007 /* AuthenticationService.swift in Sources */,
+				A1000008 /* BeeminderAPI.swift in Sources */,
+				A1000009 /* GoalRefreshService.swift in Sources */,
+				A1000010 /* GoalsViewModel.swift in Sources */,
+				A1000011 /* SettingsViewModel.swift in Sources */,
+				A1000012 /* ContentView.swift in Sources */,
+				A1000013 /* GoalListView.swift in Sources */,
+				A1000014 /* GoalRowView.swift in Sources */,
+				A1000015 /* GoalDetailView.swift in Sources */,
+				A1000016 /* DatapointInputView.swift in Sources */,
+				A1000017 /* LoginView.swift in Sources */,
+				A1000018 /* SettingsView.swift in Sources */,
+				A1000019 /* ErrorBannerView.swift in Sources */,
+				A1000020 /* Constants.swift in Sources */,
+				A1000021 /* Extensions.swift in Sources */,
+				A1000022 /* Secrets.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F5000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F5000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		F6000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BeeminderBar/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BeeminderBar;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joaoeira.beeminderbar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F6000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BeeminderBar/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BeeminderBar;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joaoeira.beeminderbar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F4000001 /* Build configuration list for PBXProject "BeeminderBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5000001 /* Debug */,
+				F5000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2000001 /* Build configuration list for PBXNativeTarget "BeeminderBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6000001 /* Debug */,
+				F6000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F3000001 /* Project object */;
+}
