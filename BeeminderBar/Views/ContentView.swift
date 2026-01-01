@@ -41,11 +41,10 @@ struct ContentView: View {
             footerView
         }
         .task {
-            await goalsViewModel.fetchGoals()
-            goalsViewModel.startPolling()
-        }
-        .onDisappear {
-            goalsViewModel.stopPolling()
+            // Polling is started at app launch, just fetch on first view
+            if goalsViewModel.goals.isEmpty {
+                await goalsViewModel.fetchGoals()
+            }
         }
     }
 

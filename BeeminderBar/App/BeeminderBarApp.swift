@@ -14,15 +14,24 @@ struct BeeminderBarApp: App {
                 .onOpenURL { url in
                     handleIncomingURL(url)
                 }
+                .onAppear {
+                    startBackgroundPollingIfAuthenticated()
+                }
         } label: {
-            Image(systemName: "chart.line.uptrend.xyaxis")
-                .symbolRenderingMode(.hierarchical)
+            Image("MenuBarIcon")
+                .renderingMode(.template)
         }
         .menuBarExtraStyle(.window)
 
         Settings {
             SettingsView()
                 .environmentObject(authService)
+        }
+    }
+
+    private func startBackgroundPollingIfAuthenticated() {
+        if authService.isAuthenticated {
+            goalsViewModel.startPolling()
         }
     }
 

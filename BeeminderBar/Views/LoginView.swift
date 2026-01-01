@@ -8,9 +8,10 @@ struct LoginView: View {
         VStack(spacing: 20) {
             Spacer()
 
-            Image(systemName: "chart.line.uptrend.xyaxis")
-                .font(.system(size: 50))
-                .foregroundColor(.accentColor)
+            Image("BeeIcon")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 80, height: 80)
 
             Text("BeeminderBar")
                 .font(.title2)

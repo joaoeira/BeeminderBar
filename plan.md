@@ -31,13 +31,35 @@ A macOS menu bar app for tracking Beeminder goals and adding datapoints.
 - [x] Create Xcode project (`BeeminderBar.xcodeproj`)
 - [x] Implement all source files (Models, Services, Views, ViewModels)
 - [x] Build and run menu bar app shell
+- [x] OAuth authentication working
+- [x] Goals fetching and displaying
+- [x] Dark mode compatibility (fixed title color with `NSColor.labelColor`)
+- [x] High-resolution graphs (switched from `thumbUrl` to `graphUrl`)
+- [x] Settings window accessible via gear icon
+- [x] Custom bee icons (tinted for menu bar, colorful for login)
+- [x] Install script (`scripts/install.sh`)
+- [x] README.md with development instructions
 
-**Current Status**: App builds and runs. Ready for OAuth testing (Milestone 2)
+**Current Status**: Core app functional (Milestones 1-4 complete)
 
-### Next Steps
-1. Click the menu bar icon to see the login view
-2. Click "Sign in with Beeminder" to test OAuth flow
-3. Debug any issues with the OAuth callback handling
+### Completed Features
+- Menu bar app with popover UI
+- OAuth login with Beeminder
+- Goal list sorted by urgency with color-coded indicators
+- Disclosable high-res graphs
+- Inline datapoint input
+- Settings with logout option
+- Dark mode support
+- Background polling (configurable interval: 1, 5, 10, or 15 minutes)
+- Launch at login toggle (syncs with actual system state)
+
+### Remaining Work
+- [ ] Test datapoint submission
+- [ ] Keyboard navigation refinement
+- [ ] Error handling improvements
+
+### Known Issues
+- Keychain prompts for password (click "Always Allow" to fix, or sign app with developer certificate)
 
 ---
 

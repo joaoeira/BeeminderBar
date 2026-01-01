@@ -3,8 +3,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var authService: AuthenticationService
-    @AppStorage(Constants.launchAtLoginKey) private var launchAtLogin = false
     @AppStorage(Constants.refreshIntervalKey) private var refreshInterval = 5
+    @State private var launchAtLogin = false
+    @State private var launchAtLoginError: String?
 
     var body: some View {
         Form {
@@ -26,6 +27,12 @@ struct SettingsView: View {
                         setLaunchAtLogin(newValue)
                     }
 
+                if let error = launchAtLoginError {
+                    Text(error)
+                        .font(.caption)
+                        .foregroundColor(.red)
+                }
+
                 Picker("Refresh Interval", selection: $refreshInterval) {
                     Text("1 minute").tag(1)
                     Text("5 minutes").tag(5)
@@ -40,14 +47,18 @@ struct SettingsView: View {
                 }
 
                 Link("Beeminder Website", destination: URL(string: "https://www.beeminder.com")!)
-                Link("Report an Issue", destination: URL(string: "https://github.com/yourname/beeminderbar/issues")!)
             }
         }
         .formStyle(.grouped)
         .frame(width: 350, height: 300)
+        .onAppear {
+            // Sync toggle with actual system state
+            launchAtLogin = SMAppService.mainApp.status == .enabled
+        }
     }
 
     private func setLaunchAtLogin(_ enabled: Bool) {
+        launchAtLoginError = nil
         do {
             if enabled {
                 try SMAppService.mainApp.register()
@@ -55,7 +66,9 @@ struct SettingsView: View {
                 try SMAppService.mainApp.unregister()
             }
         } catch {
-            print("Failed to \(enabled ? "enable" : "disable") launch at login: \(error)")
+            launchAtLoginError = "Failed: \(error.localizedDescription)"
+            // Revert toggle to actual state
+            launchAtLogin = SMAppService.mainApp.status == .enabled
         }
     }
 }

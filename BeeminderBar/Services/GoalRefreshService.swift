@@ -6,12 +6,35 @@ class GoalRefreshService: ObservableObject {
     @Published var lastRefresh: Date?
 
     private var timer: Timer?
-    private let refreshInterval: TimeInterval = 5 * 60  // 5 minutes
+    private var cancellables = Set<AnyCancellable>()
 
     var onRefreshNeeded: (() async -> Void)?
 
+    /// Refresh interval in minutes, read from UserDefaults
+    private var refreshIntervalMinutes: Int {
+        let interval = UserDefaults.standard.integer(forKey: Constants.refreshIntervalKey)
+        return interval > 0 ? interval : 5  // Default 5 minutes
+    }
+
+    private var refreshInterval: TimeInterval {
+        TimeInterval(refreshIntervalMinutes * 60)
+    }
+
+    init() {
+        // Watch for settings changes
+        NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
+            .sink { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    self?.restartPollingIfNeeded()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
     func startPolling() {
         stopPolling()
+
+        print("Starting background polling every \(refreshIntervalMinutes) minutes")
 
         timer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: true) { [weak self] _ in
             Task { @MainActor [weak self] in
@@ -20,6 +43,7 @@ class GoalRefreshService: ObservableObject {
             }
         }
 
+        // Also run immediately
         Task {
             await onRefreshNeeded?()
             lastRefresh = Date()
@@ -29,6 +53,12 @@ class GoalRefreshService: ObservableObject {
     func stopPolling() {
         timer?.invalidate()
         timer = nil
+    }
+
+    private func restartPollingIfNeeded() {
+        guard timer != nil else { return }
+        print("Refresh interval changed, restarting polling")
+        startPolling()
     }
 
     func refreshNow() async {
