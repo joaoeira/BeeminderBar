@@ -20,6 +20,7 @@ struct ContentView: View {
         VStack(spacing: 0) {
             headerView
             Divider()
+                .background(Color(nsColor: .separatorColor))
 
             if let error = goalsViewModel.error {
                 ErrorBannerView(error: error) {
@@ -38,6 +39,7 @@ struct ContentView: View {
             }
 
             Divider()
+                .background(Color(nsColor: .separatorColor))
             footerView
         }
         .task {
