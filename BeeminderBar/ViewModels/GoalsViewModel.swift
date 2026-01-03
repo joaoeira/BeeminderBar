@@ -36,10 +36,12 @@ class GoalsViewModel: ObservableObject {
 
     // MARK: - Actions
 
-    func fetchGoals() async {
+    func fetchGoals(showLoading: Bool = true) async {
         guard let token = KeychainService.load(.accessToken) else { return }
 
-        isLoading = true
+        if showLoading {
+            isLoading = true
+        }
         error = nil
 
         do {
@@ -48,7 +50,9 @@ class GoalsViewModel: ObservableObject {
             self.error = error
         }
 
-        isLoading = false
+        if showLoading {
+            isLoading = false
+        }
     }
 
     func addDatapoint(to goal: Goal) async {
@@ -83,6 +87,14 @@ class GoalsViewModel: ObservableObject {
     }
 
     private func retryFetchUntilUpdated(goalId: String, previousGoal: Goal) async {
+        // Immediate fetch - Beeminder might have already processed the update
+        await fetchGoals(showLoading: false)
+        if let updatedGoal = goals.first(where: { $0.id == goalId }),
+           hasGoalBeenUpdated(previous: previousGoal, current: updatedGoal) {
+            updatingGoalIds.remove(goalId)
+            return
+        }
+
         // Retry intervals: 5s, 15s, 30s, 1min
         let retryIntervals: [UInt64] = [5, 15, 30, 60]
 
@@ -90,8 +102,8 @@ class GoalsViewModel: ObservableObject {
             // Wait for the specified interval
             try? await Task.sleep(nanoseconds: interval * 1_000_000_000)
 
-            // Fetch updated goals
-            await fetchGoals()
+            // Fetch updated goals (silent to avoid spinner flashing)
+            await fetchGoals(showLoading: false)
 
             // Check if the goal has been updated
             if let updatedGoal = goals.first(where: { $0.id == goalId }),
@@ -102,7 +114,8 @@ class GoalsViewModel: ObservableObject {
             }
         }
 
-        // Final fetch after all retries
+        // Final fetch after all retries to ensure we have latest data
+        await fetchGoals(showLoading: false)
         updatingGoalIds.remove(goalId)
     }
 
