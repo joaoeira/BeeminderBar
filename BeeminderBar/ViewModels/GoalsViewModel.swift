@@ -39,7 +39,7 @@ class GoalsViewModel: ObservableObject {
     func fetchGoals() async {
         guard let token = KeychainService.load(.accessToken) else { return }
 
-        isLoading = goals.isEmpty
+        isLoading = true
         error = nil
 
         do {

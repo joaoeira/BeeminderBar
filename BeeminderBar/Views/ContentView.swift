@@ -64,19 +64,18 @@ struct ContentView: View {
 
             Spacer()
 
-            Button {
-                Task { await goalsViewModel.refreshService.refreshNow() }
-            } label: {
-                Image(systemName: "arrow.clockwise")
-                    .rotationEffect(.degrees(goalsViewModel.isLoading ? 360 : 0))
-                    .animation(
-                        goalsViewModel.isLoading ? .linear(duration: 1).repeatForever(autoreverses: false) : .default,
-                        value: goalsViewModel.isLoading
-                    )
+            if goalsViewModel.isLoading {
+                ProgressView()
+                    .controlSize(.small)
+            } else {
+                Button {
+                    Task { await goalsViewModel.refreshService.refreshNow() }
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                }
+                .buttonStyle(.borderless)
+                .help("Refresh goals")
             }
-            .buttonStyle(.borderless)
-            .disabled(goalsViewModel.isLoading)
-            .help("Refresh goals")
 
             SettingsLink {
                 Image(systemName: "gearshape")
