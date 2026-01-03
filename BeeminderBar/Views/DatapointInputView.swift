@@ -15,6 +15,10 @@ struct DatapointInputView: View {
                 )
             )
             .textFieldStyle(.roundedBorder)
+            .disabled(
+                goalsViewModel.submittingGoalIds.contains(goal.id) ||
+                goalsViewModel.updatingGoalIds.contains(goal.id)
+            )
             .onSubmit {
                 Task { await goalsViewModel.addDatapoint(to: goal) }
             }
@@ -26,6 +30,10 @@ struct DatapointInputView: View {
                     ProgressView()
                         .scaleEffect(0.7)
                         .frame(width: 20, height: 20)
+                } else if goalsViewModel.updatingGoalIds.contains(goal.id) {
+                    ProgressView()
+                        .scaleEffect(0.7)
+                        .frame(width: 20, height: 20)
                 } else {
                     Image(systemName: "plus.circle.fill")
                         .foregroundColor(.accentColor)
@@ -34,7 +42,8 @@ struct DatapointInputView: View {
             .buttonStyle(.borderless)
             .disabled(
                 goalsViewModel.datapointInputValues[goal.id]?.isEmpty ?? true ||
-                goalsViewModel.submittingGoalIds.contains(goal.id)
+                goalsViewModel.submittingGoalIds.contains(goal.id) ||
+                goalsViewModel.updatingGoalIds.contains(goal.id)
             )
         }
     }
