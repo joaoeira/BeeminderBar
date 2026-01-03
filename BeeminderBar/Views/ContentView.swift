@@ -68,6 +68,11 @@ struct ContentView: View {
                 Task { await goalsViewModel.refreshService.refreshNow() }
             } label: {
                 Image(systemName: "arrow.clockwise")
+                    .rotationEffect(.degrees(goalsViewModel.isLoading ? 360 : 0))
+                    .animation(
+                        goalsViewModel.isLoading ? .linear(duration: 1).repeatForever(autoreverses: false) : .default,
+                        value: goalsViewModel.isLoading
+                    )
             }
             .buttonStyle(.borderless)
             .disabled(goalsViewModel.isLoading)
@@ -116,7 +121,11 @@ struct ContentView: View {
                     .foregroundColor(.red)
             }
 
-            if let lastRefresh = goalsViewModel.refreshService.lastRefresh {
+            if goalsViewModel.isLoading {
+                Text("Refreshing...")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            } else if let lastRefresh = goalsViewModel.refreshService.lastRefresh {
                 Text("Updated \(lastRefresh, style: .relative) ago")
                     .font(.caption2)
                     .foregroundColor(.secondary)
