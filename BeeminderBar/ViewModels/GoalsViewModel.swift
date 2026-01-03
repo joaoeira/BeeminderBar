@@ -10,6 +10,7 @@ class GoalsViewModel: ObservableObject {
     @Published var selectedGoalId: String?
     @Published var datapointInputValues: [String: String] = [:]  // goalId -> input text
     @Published var submittingGoalIds: Set<String> = []
+    @Published var updatingGoalIds: Set<String> = []  // goals waiting for Beeminder to process update
 
     // MARK: - Services
     private let api = BeeminderAPI()
@@ -57,6 +58,9 @@ class GoalsViewModel: ObservableObject {
 
         submittingGoalIds.insert(goal.id)
 
+        // Capture the current goal state before submission
+        let goalBeforeUpdate = goal
+
         do {
             _ = try await api.createDatapoint(
                 goalSlug: goal.slug,
@@ -65,12 +69,66 @@ class GoalsViewModel: ObservableObject {
             )
 
             datapointInputValues[goal.id] = nil
-            await fetchGoals()
+
+            // Move from submitting to updating state
+            submittingGoalIds.remove(goal.id)
+            updatingGoalIds.insert(goal.id)
+
+            // Start retry loop with exponential backoff
+            await retryFetchUntilUpdated(goalId: goal.id, previousGoal: goalBeforeUpdate)
         } catch {
             self.error = error
+            submittingGoalIds.remove(goal.id)
+        }
+    }
+
+    private func retryFetchUntilUpdated(goalId: String, previousGoal: Goal) async {
+        // Retry intervals: 5s, 15s, 30s, 1min
+        let retryIntervals: [UInt64] = [5, 15, 30, 60]
+
+        for interval in retryIntervals {
+            // Wait for the specified interval
+            try? await Task.sleep(nanoseconds: interval * 1_000_000_000)
+
+            // Fetch updated goals
+            await fetchGoals()
+
+            // Check if the goal has been updated
+            if let updatedGoal = goals.first(where: { $0.id == goalId }),
+               hasGoalBeenUpdated(previous: previousGoal, current: updatedGoal) {
+                // Update detected, stop retrying
+                updatingGoalIds.remove(goalId)
+                return
+            }
         }
 
-        submittingGoalIds.remove(goal.id)
+        // Final fetch after all retries
+        updatingGoalIds.remove(goalId)
+    }
+
+    private func hasGoalBeenUpdated(previous: Goal, current: Goal) -> Bool {
+        // Compare key fields that should change after a datapoint submission
+        // Check if curval has changed
+        if previous.curval != current.curval {
+            return true
+        }
+
+        // Check if delta (distance from centerline) has changed
+        if previous.delta != current.delta {
+            return true
+        }
+
+        // Check if safety buffer has changed
+        if previous.safebuf != current.safebuf {
+            return true
+        }
+
+        // Check if updatedAt timestamp has changed
+        if previous.updatedAt != current.updatedAt {
+            return true
+        }
+
+        return false
     }
 
     func toggleGoalExpanded(_ goal: Goal) {
