@@ -19,6 +19,7 @@ struct GoalListView: View {
             .padding()
         }
         .focusable()
+        .focusEffectDisabled()
         .onKeyPress(.upArrow) {
             goalsViewModel.selectPreviousGoal()
             return .handled
