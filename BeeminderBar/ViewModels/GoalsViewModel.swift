@@ -79,18 +79,18 @@ class GoalsViewModel: ObservableObject {
             updatingGoalIds.insert(goal.id)
 
             // Start retry loop with exponential backoff
-            await retryFetchUntilUpdated(goalId: goal.id, previousGoal: goalBeforeUpdate)
+            await retryFetchUntilUpdated(goalId: goal.id, previousGoal: goalBeforeUpdate, submittedValue: value)
         } catch {
             self.error = error
             submittingGoalIds.remove(goal.id)
         }
     }
 
-    private func retryFetchUntilUpdated(goalId: String, previousGoal: Goal) async {
+    private func retryFetchUntilUpdated(goalId: String, previousGoal: Goal, submittedValue: Double) async {
         // Immediate fetch - Beeminder might have already processed the update
         await fetchGoals(showLoading: false)
         if let updatedGoal = goals.first(where: { $0.id == goalId }),
-           hasGoalBeenUpdated(previous: previousGoal, current: updatedGoal) {
+           hasGoalBeenUpdated(previous: previousGoal, current: updatedGoal, submittedValue: submittedValue) {
             updatingGoalIds.remove(goalId)
             return
         }
@@ -99,15 +99,20 @@ class GoalsViewModel: ObservableObject {
         let retryIntervals: [UInt64] = [5, 15, 30, 60]
 
         for interval in retryIntervals {
-            // Wait for the specified interval
-            try? await Task.sleep(nanoseconds: interval * 1_000_000_000)
+            do {
+                try await Task.sleep(nanoseconds: interval * 1_000_000_000)
+            } catch {
+                // Task was cancelled, clean up and exit
+                updatingGoalIds.remove(goalId)
+                return
+            }
 
             // Fetch updated goals (silent to avoid spinner flashing)
             await fetchGoals(showLoading: false)
 
             // Check if the goal has been updated
             if let updatedGoal = goals.first(where: { $0.id == goalId }),
-               hasGoalBeenUpdated(previous: previousGoal, current: updatedGoal) {
+               hasGoalBeenUpdated(previous: previousGoal, current: updatedGoal, submittedValue: submittedValue) {
                 // Update detected, stop retrying
                 updatingGoalIds.remove(goalId)
                 return
@@ -119,26 +124,34 @@ class GoalsViewModel: ObservableObject {
         updatingGoalIds.remove(goalId)
     }
 
-    private func hasGoalBeenUpdated(previous: Goal, current: Goal) -> Bool {
-        // Compare key fields that should change after a datapoint submission
-        // Note: We intentionally exclude updatedAt because Beeminder updates that field
-        // immediately when a datapoint is created, before curval/delta/safebuf are
-        // recomputed. Checking only these derived values ensures we wait until the
-        // backend has fully processed the datapoint.
+    private func hasGoalBeenUpdated(previous: Goal, current: Goal, submittedValue: Double) -> Bool {
+        // We verify that curval changed by approximately the submitted value to avoid
+        // false positives from unrelated changes (background refresh, time-based safebuf drift).
+        let expectedDelta = abs(submittedValue)
+        let tolerance = max(0.01, expectedDelta * 0.01)
 
-        // Check if curval has changed
-        if previous.curval != current.curval {
-            return true
-        }
+        // Check curval if available
+        if let prevCurval = previous.curval, let currCurval = current.curval {
+            let curvalDelta = currCurval - prevCurval
 
-        // Check if delta (distance from centerline) has changed
-        if previous.delta != current.delta {
-            return true
-        }
+            // For most goal types, curval increases by the submitted value
+            // Check if curval changed by approximately what we submitted
+            if abs(curvalDelta - submittedValue) <= tolerance {
+                return true
+            }
 
-        // Check if safety buffer has changed
-        if previous.safebuf != current.safebuf {
-            return true
+            // Some goal types may compute curval differently, so also check delta/safebuf
+            // but only if curval also moved meaningfully (not just noise)
+            if abs(curvalDelta) >= expectedDelta * 0.5 {
+                if previous.delta != current.delta || previous.safebuf != current.safebuf {
+                    return true
+                }
+            }
+        } else {
+            // curval not available, fall back to checking delta/safebuf changes
+            if previous.delta != current.delta || previous.safebuf != current.safebuf {
+                return true
+            }
         }
 
         return false
