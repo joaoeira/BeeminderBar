@@ -121,6 +121,11 @@ class GoalsViewModel: ObservableObject {
 
     private func hasGoalBeenUpdated(previous: Goal, current: Goal) -> Bool {
         // Compare key fields that should change after a datapoint submission
+        // Note: We intentionally exclude updatedAt because Beeminder updates that field
+        // immediately when a datapoint is created, before curval/delta/safebuf are
+        // recomputed. Checking only these derived values ensures we wait until the
+        // backend has fully processed the datapoint.
+
         // Check if curval has changed
         if previous.curval != current.curval {
             return true
@@ -133,11 +138,6 @@ class GoalsViewModel: ObservableObject {
 
         // Check if safety buffer has changed
         if previous.safebuf != current.safebuf {
-            return true
-        }
-
-        // Check if updatedAt timestamp has changed
-        if previous.updatedAt != current.updatedAt {
             return true
         }
 
