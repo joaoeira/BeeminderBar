@@ -28,7 +28,17 @@ struct GoalListView: View {
             goalsViewModel.selectNextGoal()
             return .handled
         }
-        .onKeyPress(.return) {
+        .onKeyPress { press in
+            guard press.key == .return else { return .ignored }
+            // Cmd+Enter with a value in input submits instead of toggling
+            if press.modifiers.contains(.command),
+               let goalId = goalsViewModel.selectedGoalId,
+               let goal = goalsViewModel.sortedGoals.first(where: { $0.id == goalId }),
+               let value = goalsViewModel.datapointInputValues[goalId],
+               !value.isEmpty {
+                Task { await goalsViewModel.addDatapoint(to: goal) }
+                return .handled
+            }
             goalsViewModel.toggleSelectedGoal()
             return .handled
         }
